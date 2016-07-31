@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
-import Navbar from 'navbar';
 
-// example class based component (smart component)
-class App extends Component {
+class Navbar extends Component {
   constructor(props) {
     super(props);
 
@@ -13,13 +11,11 @@ class App extends Component {
   render() {
     return (
       <div>
-        <Navbar />
-      </div>
-      <div>
-        {this.props.children}
+        <Link to="/">your site name</Link>
+        <Link to="posts/new">new post</Link>
       </div>
     );
   }
 }
 
-export default App;
+export default Navbar;
