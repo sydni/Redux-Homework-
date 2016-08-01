@@ -1,20 +1,25 @@
-import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import Show from './show';
+import React from 'react';
+import * as actions from '../actions';
 
-class New extends Component {
-  constructor(props) {
-    super(props);
 
-    // init component state here
-    this.state = {};
+const New = (props) => {
+  return (
+    <div>
+      {props.posts.map(post => {
+        return <Show />;
+        // render some pretty editing page - see video
+      })}
+    </div>
+  );
+};
+
+const mapStateToProps = (state) => (
+  {
+    posts: state.posts.all,
   }
+);
 
-  render() {
-    return (
-      <div>
-        {this.props.children}
-      </div>
-    );
-  }
-}
-
-export default New;
+// react-redux glue -- outputs Container that know state in props
+export default connect(mapStateToProps, { actions })(New);

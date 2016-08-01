@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
-import Navbar from 'navbar';
+import Navbar from './navbar';
 
 // example class based component (smart component)
 class App extends Component {
   constructor(props) {
     super(props);
-
     // init component state here
     this.state = {};
   }
@@ -14,8 +13,6 @@ class App extends Component {
     return (
       <div>
         <Navbar />
-      </div>
-      <div>
         {this.props.children}
       </div>
     );
