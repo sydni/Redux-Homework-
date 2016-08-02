@@ -13,22 +13,24 @@ class Listview extends Component {
     this.state = {};
   }
 
-  componentDidMount() {
+  componentWillMount() {
     this.props.fetchPosts();
   }
 
   render() {
     return (
       <div>
-        {this.props.posts.map(post => {
-          return (
-            <li key={post.id}>
-              <Link to="/posts/:id">
-                {post.title}
-              </Link>
-            </li>
-          );
-        })}
+        <ul>
+          {this.props.posts.map(post => {
+            return (
+              <li key={post.id}>
+                <Link to={`/posts/${post.id}`}>
+                  {post.title}
+                </Link>
+              </li>
+            );
+          })}
+        </ul>
       </div>
     );
   }

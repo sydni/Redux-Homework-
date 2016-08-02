@@ -1,13 +1,13 @@
 import axios from 'axios';
 // import thunk from 'redux-thunk';
-
+import { browserHistory } from 'react-router';
 
 export const ActionTypes = {
   FETCH_POSTS: 'FETCH_POSTS',
   FETCH_POST: 'FETCH_POST',
-  // CREATE_POST: 'CREATE_POST',
-  // UPDATE_POST: 'UPDATE_POST',
-  // DELETE_POST: 'DELETE_POST',
+  CREATE_POST: 'CREATE_POST',
+  UPDATE_POST: 'UPDATE_POST',
+  DELETE_POST: 'DELETE_POST',
 };
 
 const ROOT_URL = 'https://cs52-blog.herokuapp.com/api';
@@ -40,17 +40,41 @@ export function fetchPost(id) {
 
 export function createPost(post) {
  /* axios post */
-  const fields = { title: '', contents: '', tags: '' };
-  axios.post(`${ROOT_URL}/posts/${API_KEY}`, fields);
+  return (dispatch) => {
+    axios.post(`${ROOT_URL}/posts/${API_KEY}`, post).then(response => {
+      dispatch({ type: 'CREATE_POST', payload: response.data });
+       // change the url with browserhistory
+    }).catch(error => {
+     // hit an error do something else!
+    });
+  };
 }
 
-export function updatePost(post) {
+export function updatePost(id, post) {
   /* axios put */
-  axios.put(`${ROOT_URL}/posts/${API_KEY}`, post);
+
+  return (dispatch) => {
+    axios.put(`${ROOT_URL}/posts/${id}${API_KEY}`, post).then(response => {
+      dispatch({ type: 'UPDATE_POST', payload: response.data });
+      browserHistory.push('/');
+      // navigate the browser
+    }).catch(error => {
+    // hit an error do something else!
+    });
+  };
 }
 
 
 export function deletePost(id) {
   /* axios delete */
-  axios.delete(`${ROOT_URL}/posts/${id}${API_KEY}`);
+
+  return (dispatch) => {
+    axios.delete(`${ROOT_URL}/posts/${id}${API_KEY}`).then(response => {
+      dispatch({ type: 'DELETE_POST', payload: response.data });
+      browserHistory.push('/');
+      // navigate the browser
+    }).catch(error => {
+    // hit an error do something else!
+    });
+  };
 }
