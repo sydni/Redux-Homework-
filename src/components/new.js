@@ -40,8 +40,6 @@ class New extends Component {
   }
 
   handleSubmit(event) {
-    event.stopPropagation();
-    event.preventDefault();
     this.props.createPost({ title: this.state.title, tags: this.state.tags, content: this.state.content });
   }
 

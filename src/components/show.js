@@ -58,17 +58,18 @@ class Show extends Component {
   }
 
 
-  rendercheck() {
-    if (this.state.isEditing) {
-      return (<i className="fa fa-check" onClick={() => {
-        this.setState({ isEditing: false });
-      }}></i>);
-    } else {
-      return (<i className="fa fa-pencil" onClick={() => {
-        this.setState({ isEditing: true });
-      }}></i>);
-    }
-  }
+  // rendercheck() {
+  //   if (!this.state.isEditing) {
+  //     return (<button onClick={() => {
+  //       this.setState({ isEditing: true });
+  //     }}>Edit Post</button>);
+  //   } else {
+  //     return (
+  //       <div>
+  //       </div>
+  //     );
+  //   }
+  // }
 
   /*
   <div className="post">
@@ -132,12 +133,15 @@ class Show extends Component {
               {this.props.post.content}
             </p>
           </div>
-          {this.rendercheck()}
 
-          <i className="fa fa-trash" onClick={() => {
+          <button onClick={() => {
+            this.setState({ isEditing: true });
+          }}>Edit Post</button>
+
+          <button onClick={() => {
             this.props.deletePost(this.props.params.id);
             // instead of set state just delete the post
-          }}></i>
+          }}>Delete Post</button>
 
         </div>
 
