@@ -17,12 +17,11 @@ const API_KEY = '?key=s_topper';
 
 
 export function fetchPosts() {
- /* axios get */
   return (dispatch) => {
     axios.get(`${ROOT_URL}/posts/${API_KEY}`).then(response => {
       dispatch({ type: 'FETCH_POSTS', payload: response.data });
     }).catch(error => {
-    // hit an error do something else!
+      console.log(error);
     });
   };
 }
@@ -32,47 +31,42 @@ export function fetchPost(id) {
     axios.get(`${ROOT_URL}/posts/${id}${API_KEY}`).then(response => {
       dispatch({ type: 'FETCH_POST', payload: response.data });
     }).catch(error => {
-    // hit an error do something else!
+      console.log(error);
     });
   };
 }
 
 
 export function createPost(post) {
- /* axios post */
   return (dispatch) => {
     axios.post(`${ROOT_URL}/posts/${API_KEY}`, post).then(response => {
       dispatch({ type: 'CREATE_POST', payload: response.data });
       browserHistory.push('/');
     }).catch(error => {
-     // hit an error do something else!
+      console.log(error);
     });
   };
 }
 
 export function updatePost(id, post) {
-  /* axios put */
-
   return (dispatch) => {
     axios.put(`${ROOT_URL}/posts/${id}${API_KEY}`, post).then(response => {
       dispatch({ type: 'UPDATE_POST', payload: response.data });
       browserHistory.push('/');
     }).catch(error => {
-    // hit an error do something else!
+      console.log(error);
     });
   };
 }
 
 
 export function deletePost(id) {
-  /* axios delete */
-
   return (dispatch) => {
     axios.delete(`${ROOT_URL}/posts/${id}${API_KEY}`).then(response => {
       dispatch({ type: 'DELETE_POST', payload: response.data });
       browserHistory.push('/');
     }).catch(error => {
-    // hit an error do something else!
+      console.log(error);
     });
   };
 }

@@ -20,10 +20,10 @@ class Listview extends Component {
   render() {
     return (
       <div>
-        <ul>
+        <ul className="list-group">
           {this.props.posts.map(post => {
             return (
-              <li key={post.id}>
+              <li className="list-group-item list-group-item-action" key={post.id}>
                 <Link to={`/posts/${post.id}`}>
                   {post.title}
                 </Link>
@@ -37,12 +37,10 @@ class Listview extends Component {
 }
 
 
-// connects particular parts of redux state to this components props
 const mapStateToProps = (state) => (
   {
     posts: state.posts.all,
   }
 );
 
-// react-redux glue -- outputs Container that know state in props
 export default connect(mapStateToProps, actions)(Listview);

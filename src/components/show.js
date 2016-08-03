@@ -26,6 +26,7 @@ class Show extends Component {
     this.onTitleChange = this.onTitleChange.bind(this);
     this.onTagsChange = this.onTagsChange.bind(this);
     this.onContentChange = this.onContentChange.bind(this);
+    this.nosubmit = this.nosubmit.bind(this);
   }
 
 
@@ -55,6 +56,12 @@ class Show extends Component {
 
   handleSubmit(event) {
     this.props.updatePost(this.props.params.id, { title: this.state.title, tags: this.state.tags, content: this.state.content });
+  }
+
+  nosubmit(event) {
+    event.preventDefault();
+    event.stopPropagation();
+    return false;
   }
 
 
@@ -96,24 +103,23 @@ class Show extends Component {
       );
     } else if (this.state.isEditing) {
       return (
-        <div>
+        <div className="newpost">
 
           <div className="inputbar">
-            <form>
+            <form onSubmit={this.nosubmit}>
               <input onChange={this.onTitleChange} placeholder="enter a title" value={this.state.title} />
             </form>
           </div>
 
           <div className="inputbar">
-            <form>
+            <form onSubmit={this.nosubmit}>
               <input onChange={this.onTagsChange} placeholder="enter tags" value={this.state.tags} />
             </form>
           </div>
 
-          <div className="inputbar">
-            <form>
-              <input onChange={this.onContentChange} placeholder="enter content" value={this.state.content} />
-            </form>
+          <div>
+            <textarea onSubmit={this.nosubmit} onChange={this.onContentChange} placeholder="enter content" value={this.state.content}>
+            </textarea>
           </div>
 
           <button className="button" onClick={this.handleSubmit}>{'Update Post'}</button>
@@ -125,23 +131,24 @@ class Show extends Component {
     } else {
       return (
         <div>
-          <div>
-            <h3>
+          <div className="post">
+            <div className="title">
               {this.props.post.title}
-            </h3>
-            <p>
+            </div>
+            <div className="content">
               {this.props.post.content}
-            </p>
+            </div>
+
+
+            <button className="push" onClick={() => {
+              this.setState({ isEditing: true, title: this.props.post.title, tags: this.props.post.tags, content: this.props.post.content });
+            }}>Edit Post</button>
+
+            <button className="push" onClick={() => {
+              this.props.deletePost(this.props.params.id);
+            }}>Delete Post</button>
+
           </div>
-
-          <button onClick={() => {
-            this.setState({ isEditing: true });
-          }}>Edit Post</button>
-
-          <button onClick={() => {
-            this.props.deletePost(this.props.params.id);
-            // instead of set state just delete the post
-          }}>Delete Post</button>
 
         </div>
 

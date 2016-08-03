@@ -19,6 +19,7 @@ class New extends Component {
     this.onTitleChange = this.onTitleChange.bind(this);
     this.onTagsChange = this.onTagsChange.bind(this);
     this.onContentChange = this.onContentChange.bind(this);
+    this.nosubmit = this.nosubmit.bind(this);
   }
 
   onTitleChange(event) {
@@ -43,6 +44,12 @@ class New extends Component {
     this.props.createPost({ title: this.state.title, tags: this.state.tags, content: this.state.content });
   }
 
+  nosubmit(event) {
+    event.preventDefault();
+    event.stopPropagation();
+    return false;
+  }
+
   // have some pretty editing page
   // make smart component -> local state, like searchbar
   // on submit call createpost
@@ -54,21 +61,20 @@ class New extends Component {
         </h3>
 
         <div className="inputbar">
-          <form>
+          <form onSubmit={this.nosubmit}>
             <input onChange={this.onTitleChange} placeholder="enter a title" value={this.state.title} />
           </form>
         </div>
 
         <div className="inputbar">
-          <form>
+          <form onSubmit={this.nosubmit}>
             <input onChange={this.onTagsChange} placeholder="enter tags" value={this.state.tags} />
           </form>
         </div>
 
-        <div className="inputbar">
-          <form>
-            <input onChange={this.onContentChange} placeholder="enter content" value={this.state.content} />
-          </form>
+        <div>
+          <textarea onSubmit={this.nosubmit} onChange={this.onContentChange} placeholder="enter content" value={this.state.content}>
+          </textarea>
         </div>
 
         <button className="button" onClick={this.handleSubmit}>{'Create Post'}</button>
@@ -77,6 +83,7 @@ class New extends Component {
     );
   }
 }
+
 
 const mapStateToProps = (state) => (
   {
