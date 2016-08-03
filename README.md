@@ -1,1 +1,3 @@
-# js-starter with react react-router babel sass and eslint
+# Sydni's Blog!
+
+sydniblog.surge.sh
