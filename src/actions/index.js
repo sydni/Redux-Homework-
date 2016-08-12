@@ -14,9 +14,9 @@ export const ActionTypes = {
 };
 
 
-const ROOT_URL = 'http://localhost:9090/api';
+// const ROOT_URL = 'http://localhost:9090/api';
 // const ROOT_URL = 'https://cs52-blog.herokuapp.com/api';
-// const ROOT_URL = 'https://sydniblog.herokuapp.com/api';
+const ROOT_URL = 'https://sydniblog.herokuapp.com/api';
 const API_KEY = '?key=s_topper';
 
 // deletes token from localstorage
