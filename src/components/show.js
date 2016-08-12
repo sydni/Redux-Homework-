@@ -65,35 +65,6 @@ class Show extends Component {
   }
 
 
-  // rendercheck() {
-  //   if (!this.state.isEditing) {
-  //     return (<button onClick={() => {
-  //       this.setState({ isEditing: true });
-  //     }}>Edit Post</button>);
-  //   } else {
-  //     return (
-  //       <div>
-  //       </div>
-  //     );
-  //   }
-  // }
-
-  /*
-  <div className="post">
-    <h3>
-      {this.props.params.title}
-      {this.rendercheck()}
-    </h3>
-
-    {this.renderedit()}
-
-  </div>
-
-  */
-// {this.props.post.title}
-//
-
-
   render() {
     if (!this.props.post) {
       return (
@@ -129,6 +100,7 @@ class Show extends Component {
 
       );
     } else {
+      console.log(this.props.post);
       return (
         <div>
           <div className="post">
@@ -138,7 +110,9 @@ class Show extends Component {
             <div className="content">
               {this.props.post.content}
             </div>
-
+            <div>
+              Author: {(this.props.post.author) ? this.props.post.author.username : ''}
+            </div>
 
             <button className="push" onClick={() => {
               this.setState({ isEditing: true, title: this.props.post.title, tags: this.props.post.tags, content: this.props.post.content });
